@@ -1,2 +1,2 @@
-# gakupro
-gakupro page
+# gakupro_home
+メタプラスのホームページ
