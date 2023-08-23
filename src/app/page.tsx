@@ -1,10 +1,14 @@
 import { NextPage } from 'next'
-import Test from '@/components/Test'
+//import Test from '@/components/Test'
+import Menu from '@/components/Menu'
 
 const TopPage: NextPage = () => {
   return (
     <>
-      <Test test='Hello, World!' />
+      {/*
+        *<Test test='hoge' />
+        */}
+      <Menu />
     </>
   )
 }

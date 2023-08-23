@@ -1,4 +1,5 @@
 import { Providers } from "./providers";
+import './globals.css'
 
 const siteName= 'MetaPlus Home';
 const description = 'メタプラスのホームページ';
@@ -41,11 +42,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html>
+      <head />
       <body>
-        <Providers>
-          {children}
-        </Providers>
+        <header>
+          <Providers>{children}</Providers>
+        </header>
       </body>
     </html>
   );
