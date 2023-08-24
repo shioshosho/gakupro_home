@@ -42,12 +42,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html className="hidden-scrollbar">
       <head />
-      <body>
-        <header>
+      <body>        
+        <div className="container flex flex-col w-screen h-screen">
           <Providers>{children}</Providers>
-        </header>
+        </div>
       </body>
     </html>
   );
