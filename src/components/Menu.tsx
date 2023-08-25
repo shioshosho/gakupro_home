@@ -11,7 +11,7 @@ const Menu: FC<Props> = () => {
   return(
     <>
       <header className='fixed w-full'>
-        <div className='flex justify-center drop-shadow-glow'>
+        <div className='flex justify-center drop-shadow-glow blur-[1.5px] hover:blur-none duration-150'>
           <div className="flex flex-none divide-x divide-black justify-center m-6 p-2  bg-white bg-clip-border rounded-md">
             <div className="flex flex-col items-center">
               <a href="/" className="px-4 py-1">Home</a>

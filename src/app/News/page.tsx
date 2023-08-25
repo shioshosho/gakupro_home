@@ -9,16 +9,10 @@ const TopPage: NextPage = () => {
         *<Test test='hoge' />
         */}
       <Menu />
-      <div className='pt-[101px]'>
-        {(() => {
-          const test: string = "news text"
-          const items = []
-          for(let i=0;i<50;i++){
-            items.push(<p className='text-white'>{ test }</p>)
-          }
-          return items
-        })()}
+      <div className='snap-start pt-[101px] flex flex-col h-screen w-screen select-none text-white text-center'>
+        <p>START FROM HERE</p>
       </div>
+      <div className='snap-start text-white text-center flex flex-col justify-center select-none h-screen w-screen italic'>Fin</div>
     </>
   )
 }
