@@ -1,13 +1,9 @@
 import { NextPage } from 'next'
-//import Test from '@/components/Test'
 import Menu from '@/components/Menu'
 
 const TopPage: NextPage = () => {
   return (
     <>
-      {/*
-        *<Test test='hoge' />
-        */}
       <Menu />
       <div className='snap-start pt-[101px] flex flex-col h-screen w-screen select-none text-white text-center'>
         <p>START FROM HERE</p>
