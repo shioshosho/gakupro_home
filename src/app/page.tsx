@@ -13,7 +13,7 @@ const TopPage: NextPage = () => {
   return (
     <>
       <Menu />
-      <div className='snap-start pt-[101px] flex flex-col h-screen w-screen select-none text-white text-center'>
+      <div className='snap-start pt-[101px] flex flex-col h-screen w-screen select-none text-white text-center z-0'>
         <p>START FROM HERE</p>
         <Canvas>
           {/*

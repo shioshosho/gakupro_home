@@ -10,7 +10,7 @@ const Menu: FC<Props> = () => {
   const location = usePathname()
   return(
     <>
-      <header className='fixed w-full'>
+      <header className='fixed w-full z-50'>
         <div className='flex justify-center drop-shadow-glow blur-[1.5px] hover:blur-none duration-150'>
           <div className="flex flex-none divide-x divide-black justify-center m-6 p-2  bg-white bg-clip-border rounded-md">
             <div className="flex flex-col items-center">
