@@ -1,5 +1,6 @@
-import { FC } from 'react'
+import { FC, forwardRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import * as THREE from 'three'
 
 type Props = {
   modelPath :string
@@ -8,7 +9,7 @@ type Props = {
   receiveShadow :any
 }
 
-const Scene: FC<Props> = (props) => {
+const Scene: FC<Props> = (props, ref) => {
 	const { modelPath, material, castShadow, receiveShadow, ...inputProps } = props
 	const gltf = useGLTF(modelPath)
     gltf.scene.traverse((object) => {
@@ -20,7 +21,7 @@ const Scene: FC<Props> = (props) => {
     })
   return(
     <>
-			<mesh {...inputProps}>
+			<mesh ref={ref} {...inputProps}>
 				<primitive object={gltf.scene.clone()} />
 			</mesh>
     </>
@@ -28,3 +29,5 @@ const Scene: FC<Props> = (props) => {
 }
 
 export default Scene
+
+export const WrappedScene = forwardRef(Scene)

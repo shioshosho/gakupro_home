@@ -2,10 +2,10 @@
 import { Suspense, useRef, FC } from 'react'
 import { NextPage } from 'next'
 import * as THREE from 'three'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Sky, Preload, PerspectiveCamera, OrbitControls, useHelper } from '@react-three/drei'
 import Menu from '@/components/Menu'
-import Scene from '@/features/Canvas/Scene'
+import Scene, { WrappedScene } from '@/features/Canvas/Scene'
 import Loader from '@/components/Loader'
 
 const Light: FC = () => {
@@ -18,50 +18,64 @@ const Light: FC = () => {
   )
 }
 
-const TopPage: NextPage = () => {
+const Contents: FC = () => {
   const newMaterial = new THREE.MeshStandardMaterial({color: 0x3cb371})
+  const sceneRef = useRef()
+  useFrame(() => {
+    if (sceneRef.current){
+      sceneRef.current.rotation.y -= 0.01
+    }
+  })
+  return(
+    <>
+      {/*
+        *<color attach="background" args={['#050505']} />
+        */}
+      {/*
+        *<ambientLight intensity={0.01}/>
+        */}
+      {/*
+        *<directionalLight
+        *      position={[5, 5, 5]}
+        *      intensity={1} // 光の強さ
+        *      shadow-mapSize-width={2048} // 描画精度
+        *      shadow-mapSize-height={2048}
+        *      castShadow
+        *  />
+        */}
+      <Light />
+      <Suspense fallback={<Loader />}>
+        <WrappedScene ref={sceneRef} modelPath='/kyutech_map.glb'
+        material={newMaterial}
+        rotation={[1 * Math.PI / 9, 0, 0]}
+        scale={0.02}
+        position={[0-.5, 0.5, 0]}
+        receiveShadow
+        castShadow
+        />
+        {/*
+          *<mesh position={[0,2,0]} receiveShadow castShadow>
+          *  <boxGeometry />
+          *  <meshStandardMaterial />
+          *</mesh>
+          */}
+        <mesh position={[0, -1, 0]} rotation={[-1*Math.PI / 2, 0, 0]} receiveShadow scale={70}>
+            <planeGeometry />
+            <meshStandardMaterial side={THREE.DoubleSide} />
+        </mesh>
+      </Suspense>
+    </>
+  )
+}
+
+const TopPage: NextPage = () => {
   return (
     <>
       <Menu />
       <div className='snap-start pt-[101px] flex flex-col h-screen w-screen select-none text-white text-center z-0'>
         <p>START FROM HERE</p>
         <Canvas shadows>
-          {/*
-            *<color attach="background" args={['#050505']} />
-            */}
-          {/*
-            *<ambientLight intensity={0.01}/>
-            */}
-          {/*
-            *<directionalLight
-            *      position={[5, 5, 5]}
-            *      intensity={1} // 光の強さ
-            *      shadow-mapSize-width={2048} // 描画精度
-            *      shadow-mapSize-height={2048}
-            *      castShadow
-            *  />
-            */}
-          <Light />
-          <Suspense fallback={<Loader />}>
-            <Scene modelPath='/kyutech_map.glb'
-            material={newMaterial}
-            rotation={[1 * Math.PI / 9, 0, 0]}
-            scale={0.02}
-            position={[0-.5, 0.5, 0]}
-            receiveShadow
-            castShadow
-            />
-            {/*
-              *<mesh position={[0,2,0]} receiveShadow castShadow>
-              *  <boxGeometry />
-              *  <meshStandardMaterial />
-              *</mesh>
-              */}
-            <mesh position={[0, -1, 0]} rotation={[-1*Math.PI / 2, 0, 0]} receiveShadow scale={70}>
-                <planeGeometry />
-                <meshStandardMaterial side={THREE.DoubleSide} />
-            </mesh>
-          </Suspense>
+          <Contents />
           <Preload all />
           <PerspectiveCamera />
           <OrbitControls />
