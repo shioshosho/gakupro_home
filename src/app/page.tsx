@@ -3,7 +3,7 @@ import { Suspense, useRef, FC } from 'react'
 import { NextPage } from 'next'
 import * as THREE from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Sky, Preload, PerspectiveCamera, OrbitControls, useHelper } from '@react-three/drei'
+import { SpotLight, Sky, Cloud, Preload, PerspectiveCamera, OrbitControls, useHelper } from '@react-three/drei'
 import Menu from '@/components/Menu'
 import Scene, { WrappedScene } from '@/features/Canvas/Scene'
 import Loader from '@/components/Loader'
@@ -21,9 +21,10 @@ const Light: FC = () => {
 const Contents: FC = () => {
   const newMaterial = new THREE.MeshStandardMaterial({color: 0x3cb371})
   const sceneRef = useRef()
-  useFrame(() => {
+  useFrame(({ clock }) => {
     if (sceneRef.current){
-      sceneRef.current.rotation.y -= 0.01
+      sceneRef.current.rotation.y -= 0.003
+      sceneRef.current.position.y += Math.sin(0.8 * clock.getElapsedTime()) / 400
     }
   })
   return(
@@ -44,12 +45,30 @@ const Contents: FC = () => {
         *  />
         */}
       <Light />
+      <SpotLight
+        position={[0,4,0]}
+        scale={[10,1,10]}
+        color={'white'}
+        distance={20}
+        penumbra={1}
+        castShadow
+      />
+      <SpotLight
+        position={[0,4,0]}
+        scale={[12,1,12]}
+        color={'white'}
+        distance={18}
+        penumbra={1}
+        castShadow
+        attenuation={3.5}
+        opacity={0.5}
+      />
       <Suspense fallback={<Loader />}>
         <WrappedScene ref={sceneRef} modelPath='/kyutech_map.glb'
         material={newMaterial}
         rotation={[1 * Math.PI / 9, 0, 0]}
         scale={0.02}
-        position={[0-.5, 0.5, 0]}
+        position={[-0.5, 0.3, 0]}
         receiveShadow
         castShadow
         />
@@ -59,10 +78,21 @@ const Contents: FC = () => {
           *  <meshStandardMaterial />
           *</mesh>
           */}
-        <mesh position={[0, -1, 0]} rotation={[-1*Math.PI / 2, 0, 0]} receiveShadow scale={70}>
+        <mesh position={[0, -2, 0]} rotation={[-1*Math.PI / 2, 0, 0]} receiveShadow scale={70}>
             <planeGeometry />
             <meshStandardMaterial side={THREE.DoubleSide} />
         </mesh>
+        {/*
+          <Sky
+          sunPosition={[0, 0, -1]}
+          turbidity={1.3}
+          rayleigh={0.1}
+          mieCoefficient={0.141}
+          mieDirectionalG={0.958}
+          inclination={0.5}
+          azimuth={0.5}
+          />
+          */}
       </Suspense>
     </>
   )
@@ -72,8 +102,7 @@ const TopPage: NextPage = () => {
   return (
     <>
       <Menu />
-      <div className='snap-start pt-[101px] flex flex-col h-screen w-screen select-none text-white text-center z-0'>
-        <p>START FROM HERE</p>
+      <div className='snap-start {/*pt-[101px]*/} flex flex-col h-screen w-screen select-none text-white text-center z-0'>
         <Canvas shadows>
           <Contents />
           <Preload all />
