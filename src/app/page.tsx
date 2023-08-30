@@ -3,9 +3,11 @@ import { Suspense, useRef, FC } from 'react'
 import { NextPage } from 'next'
 import * as THREE from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { SpotLight, Sky, Cloud, Preload, PerspectiveCamera, OrbitControls, useHelper } from '@react-three/drei'
+import { SpotLight, Sky, Preload, PerspectiveCamera, OrbitControls, useHelper } from '@react-three/drei'
 import Menu from '@/components/Menu'
 import Scene, { WrappedScene } from '@/features/Canvas/Scene'
+import Twinkle from '@/features/Canvas/Twinkle'
+import LowPolyCloud from '@/features/Canvas/LowPolyCloud'
 import Loader from '@/components/Loader'
 
 const Light: FC = () => {
@@ -44,24 +46,16 @@ const Contents: FC = () => {
         *      castShadow
         *  />
         */}
+      <LowPolyCloud />
+      <Twinkle />
       <Light />
       <SpotLight
         position={[0,4,0]}
         scale={[10,1,10]}
         color={'white'}
         distance={20}
-        penumbra={1}
+        penumbra={20}
         castShadow
-      />
-      <SpotLight
-        position={[0,4,0]}
-        scale={[12,1,12]}
-        color={'white'}
-        distance={18}
-        penumbra={1}
-        castShadow
-        attenuation={3.5}
-        opacity={0.5}
       />
       <Suspense fallback={<Loader />}>
         <WrappedScene ref={sceneRef} modelPath='/kyutech_map.glb'
@@ -72,12 +66,6 @@ const Contents: FC = () => {
         receiveShadow
         castShadow
         />
-        {/*
-          *<mesh position={[0,2,0]} receiveShadow castShadow>
-          *  <boxGeometry />
-          *  <meshStandardMaterial />
-          *</mesh>
-          */}
         <mesh position={[0, -2, 0]} rotation={[-1*Math.PI / 2, 0, 0]} receiveShadow scale={70}>
             <planeGeometry />
             <meshStandardMaterial side={THREE.DoubleSide} />
