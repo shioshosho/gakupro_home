@@ -5,9 +5,9 @@ import * as THREE from 'three'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { SpotLight, Sky, Preload, PerspectiveCamera, OrbitControls, useHelper } from '@react-three/drei'
 import Menu from '@/components/Menu'
-import Scene, { WrappedScene } from '@/features/Canvas/Scene'
+import { WrappedScene } from '@/features/Canvas/Scene'
 import Twinkle from '@/features/Canvas/Twinkle'
-import LowPolyCloud from '@/features/Canvas/LowPolyCloud'
+import { WrappedWireCloud } from '@/features/Canvas/WireCloud'
 import Loader from '@/components/Loader'
 
 const Light: FC = () => {
@@ -32,21 +32,34 @@ const Contents: FC = () => {
   return(
     <>
       {/*
-        *<color attach="background" args={['#050505']} />
+        <color attach="background" args={['#050505']} />
         */}
       {/*
-        *<ambientLight intensity={0.01}/>
+        <ambientLight intensity={0.01}/>
         */}
       {/*
-        *<directionalLight
-        *      position={[5, 5, 5]}
-        *      intensity={1} // 光の強さ
-        *      shadow-mapSize-width={2048} // 描画精度
-        *      shadow-mapSize-height={2048}
-        *      castShadow
-        *  />
+        <directionalLight
+              position={[5, 5, 5]}
+              intensity={1} // 光の強さ
+              shadow-mapSize-width={2048} // 描画精度
+              shadow-mapSize-height={2048}
+              castShadow
+          />
         */}
-      <LowPolyCloud />
+      <WrappedWireCloud 
+        position={[-5,2.8,1]}
+        rotation={[-2*Math.PI/3,0,0]}
+      />
+      <WrappedWireCloud 
+        position={[-2,4,0]}
+      />
+      <WrappedWireCloud 
+        position={[2,4,0]}
+      />
+      <WrappedWireCloud 
+        position={[5,2.8,1]}
+        rotation={[-2*Math.PI/3,0,0]}
+      />
       <Twinkle />
       <Light />
       <SpotLight
