@@ -24,9 +24,11 @@ const Contents: FC = () => {
   const newMaterial = new THREE.MeshStandardMaterial({color: 0x3cb371})
   const sceneRef = useRef()
   useFrame(({ clock }) => {
-    if (sceneRef.current){
-      sceneRef.current.rotation.y -= 0.003
-      sceneRef.current.position.y += Math.sin(0.8 * clock.getElapsedTime()) / 400
+    if (sceneRef.current.getGroup()){
+      sceneRef.current.getGroup().position.y += Math.sin(0.8 * clock.getElapsedTime()) / 400
+    }
+    if (sceneRef.current.getMesh()){
+      sceneRef.current.getMesh().rotation.y -= 0.003
     }
   })
   return(
