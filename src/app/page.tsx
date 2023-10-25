@@ -2,8 +2,8 @@
 import { Suspense, useRef, FC } from 'react'
 import { NextPage } from 'next'
 import * as THREE from 'three'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { SpotLight, Sky, Preload, PerspectiveCamera, OrbitControls, useHelper } from '@react-three/drei'
+import { Canvas, useFrame, useThree} from '@react-three/fiber'
+import { SpotLight, Sky, Preload, PerspectiveCamera, OrbitControls, useHelper, Html } from '@react-three/drei'
 import Menu from '@/components/Menu'
 import { WrappedScene } from '@/features/Canvas/Scene'
 import Twinkle from '@/features/Canvas/Twinkle'
@@ -12,7 +12,9 @@ import Loader from '@/components/Loader'
 
 const Light: FC = () => {
   const light1 = useRef()
-  useHelper(light1, THREE.SpotLightHelper)
+  {/*
+    *useHelper(light1, THREE.SpotLightHelper)
+    */}
   return(
     <>
       <spotLight ref={light1} intensity={5} position={[0,4,0]} shadow-mapSize-width={2048} shadow-mapSize-height={2048} castShadow />
@@ -31,37 +33,14 @@ const Contents: FC = () => {
       sceneRef.current.getMesh().rotation.y -= 0.003
     }
   })
+  useThree(({ camera }) => {
+    camera.position.set(0,0,5);
+     {/*
+       *console.log(camera.position)
+       */}
+  });
   return(
     <>
-      {/*
-        <color attach="background" args={['#050505']} />
-        */}
-      {/*
-        <ambientLight intensity={0.01}/>
-        */}
-      {/*
-        <directionalLight
-              position={[5, 5, 5]}
-              intensity={1} // 光の強さ
-              shadow-mapSize-width={2048} // 描画精度
-              shadow-mapSize-height={2048}
-              castShadow
-          />
-        */}
-      <WrappedWireCloud 
-        position={[-5,2.8,1]}
-        rotation={[-2*Math.PI/3,0,0]}
-      />
-      <WrappedWireCloud 
-        position={[-2,4,0]}
-      />
-      <WrappedWireCloud 
-        position={[2,4,0]}
-      />
-      <WrappedWireCloud 
-        position={[5,2.8,1]}
-        rotation={[-2*Math.PI/3,0,0]}
-      />
       <Twinkle />
       <Light />
       <SpotLight
@@ -85,17 +64,6 @@ const Contents: FC = () => {
             <planeGeometry />
             <meshStandardMaterial side={THREE.DoubleSide} />
         </mesh>
-        {/*
-          <Sky
-          sunPosition={[0, 0, -1]}
-          turbidity={1.3}
-          rayleigh={0.1}
-          mieCoefficient={0.141}
-          mieDirectionalG={0.958}
-          inclination={0.5}
-          azimuth={0.5}
-          />
-          */}
       </Suspense>
     </>
   )
@@ -105,16 +73,23 @@ const TopPage: NextPage = () => {
   return (
     <>
       <Menu />
-      <div className='snap-start {/*pt-[101px]*/} flex flex-col h-screen w-screen select-none text-white text-center z-0'>
-        <Canvas shadows>
+      <div className='{/*pt-[101px]*/} flex flex-col h-screen w-screen select-none z-0'>
+        <div className='h-2/3 mt-[101px]'>
+          <Canvas shadows>
           <Contents />
           <Preload all />
+          {/*
           <PerspectiveCamera />
           <OrbitControls />
-        </Canvas>
+          */}
+          {/*
+            *<Html fullscreen className='flex flex-col text-white text-center justify-end'><div className='mb-36 text-8xl'>Hello,World!</div></Html>
+            */}
+          </Canvas>
+        </div>
       </div>
-      <div className='snap-start text-white text-center h-screen w-screen'>SNAP ME w/ snap-start</div>
-      <div className='snap-start text-white text-center flex flex-col justify-center select-none h-screen w-screen italic'>Fin</div>
+      <div className='text-white text-center h-screen w-screen'>SNAP ME w/ snap-start</div>
+      <div className='text-white text-center flex flex-col justify-center select-none h-screen w-screen italic'>Fin</div>
     </>
   )
 }
