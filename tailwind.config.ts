@@ -18,6 +18,10 @@ const config: Config = {
         purple: [
           "0 10px 8px rgba(23, 0, 103, 0.25)"
         ]
+      },
+      aspectRatio: {
+        '12/5': '12 / 5',
+        '12/3.5': '12/3.5'
       }
     },
   },
