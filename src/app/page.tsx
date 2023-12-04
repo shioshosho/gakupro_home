@@ -3,7 +3,7 @@ import { Suspense, useRef, FC } from 'react'
 import { NextPage } from 'next'
 import * as THREE from 'three'
 import { Canvas, useFrame, useThree} from '@react-three/fiber'
-import { SpotLight, Sky, Preload, PerspectiveCamera, OrbitControls, useHelper, Html } from '@react-three/drei'
+import { SpotLight, Sky, Preload, PerspectiveCamera, OrbitControls, useHelper, Text } from '@react-three/drei'
 import Menu from '@/components/Menu'
 import HomeProductButtons from '@/components/HomeProductButtons'
 import { WrappedScene } from '@/features/Canvas/Scene'
@@ -65,6 +65,9 @@ const Contents: FC = () => {
         receiveShadow
         castShadow
         />
+        <Text position={[0,2.5,0]} scale={[viewport.width/20,viewport.width/20,viewport.width/20]} color='white'>
+          Write Something Here !
+        </Text>
         <mesh
         //position={[0, -2, 0]}
         position={[0,-viewport.width/10,0]}
@@ -82,7 +85,7 @@ const TopPage: NextPage = () => {
   return (
     <>
       <Menu />
-      <div className='{/*pt-[101px]*/} flex flex-col w-screen select-none z-0'>
+      <div className='{/*pt-[101px]*/} flex flex-col w-screen select-none'>
         <div className='md:aspect-[12/5] 2xl:aspect-[12/3.5] mt-[101px]'>
           <Canvas shadows>
             <Contents />
@@ -91,17 +94,14 @@ const TopPage: NextPage = () => {
             <PerspectiveCamera />
             <OrbitControls />
             */}
-            <Html fullscreen className='flex flex-col text-white text-center justify-end'>
-              <div className='mb-32 text-6xl'>Catch Copy</div>
-            </Html>
           </Canvas>
         </div>
       </div>
       <div className='text-white text-center text-2xl my-12'>
-        メタプラスは令和5年度に採択された九州工業大学・明専会学生プロジェクトです．<br/>
-        本プロジェクトでは以下に示すようなプロダクトに取り組んでいます．
+        メタプラスは令和5年度に採択された九州工業大学・明専会学生プロジェクトです<br/>
+        本プロジェクトでは以下に示すようなプロダクトに取り組んでいます
       </div>
-      <HomeProductButtons />
+      <div className='mb-12'><HomeProductButtons /></div>
     </>
   )
 }
