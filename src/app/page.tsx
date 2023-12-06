@@ -6,9 +6,8 @@ import { Canvas, useFrame, useThree} from '@react-three/fiber'
 import { SpotLight, Sky, Preload, PerspectiveCamera, OrbitControls, useHelper, Text } from '@react-three/drei'
 import Menu from '@/components/Menu'
 import HomeProductButtons from '@/components/HomeProductButtons'
-import { WrappedScene } from '@/features/Canvas/Scene'
+import Scene from '@/features/Canvas/Scene'
 import Twinkle from '@/features/Canvas/Twinkle'
-import { WrappedWireCloud } from '@/features/Canvas/WireCloud'
 import Loader from '@/components/Loader'
 
 const Light: FC = () => {
@@ -18,20 +17,20 @@ const Light: FC = () => {
     */}
   return(
     <>
-      <spotLight ref={light1} intensity={5} position={[0,4,0]} shadow-mapSize-width={2048} shadow-mapSize-height={2048} castShadow />
+      <spotLight intensity={5} position={[0,4,0]} shadow-mapSize-width={2048} shadow-mapSize-height={2048} castShadow />
     </>
   )
 }
 
 const Contents: FC = () => {
   const newMaterial = new THREE.MeshStandardMaterial({color: 0x3cb371})
-  const sceneRef = useRef()
+  const sceneRef = useRef<any>(null!)
   const { viewport } = useThree()
   useFrame(({ clock }) => {
-    if (sceneRef.current.getGroup()){
+    if (sceneRef.current && sceneRef.current.getGroup()){
       sceneRef.current.getGroup().position.y += Math.sin(0.8 * clock.getElapsedTime()) / 400
     }
-    if (sceneRef.current.getMesh()){
+    if (sceneRef.current && sceneRef.current.getMesh()){
       sceneRef.current.getMesh().rotation.y -= 0.003
     }
   })
@@ -55,7 +54,9 @@ const Contents: FC = () => {
         castShadow
       />
       <Suspense fallback={<Loader />}>
-        <WrappedScene ref={sceneRef} modelPath='/kyutech_map.glb'
+        <Scene
+        ref={sceneRef}
+        modelPath='/kyutech_map.glb'
         material={newMaterial}
         rotation={[1 * Math.PI / 9, 0, 0]}
         //scale={0.02}
@@ -101,7 +102,7 @@ const TopPage: NextPage = () => {
         メタプラスは令和5年度に採択された九州工業大学・明専会学生プロジェクトです<br/>
         本プロジェクトでは以下に示すようなプロダクトに取り組んでいます
       </div>
-      <div className='mb-12'><HomeProductButtons /></div>
+      <div className='mb-6'><HomeProductButtons /></div>
     </>
   )
 }
