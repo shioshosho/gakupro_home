@@ -98,9 +98,11 @@ const TopPage: NextPage = () => {
           </Canvas>
         </div>
       </div>
-      <div className='text-white text-center text-2xl my-12'>
-        メタプラスは令和5年度に採択された九州工業大学・明専会学生プロジェクトです<br/>
-        本プロジェクトでは以下に示すようなプロダクトに取り組んでいます
+      <div className='text-white text-center my-8 text-2xl max-[768px]:my-6 max-[768px]:text-sm '>
+        メタプラスは令和5年度に採択された<br className='hidden max-[768px]:block '/>
+        九州工業大学・明専会学生プロジェクトです<br/>
+        本プロジェクトでは以下に示すようなプロダクトに<br className='hidden max-[768px]:block '/>
+        取り組んでいます
       </div>
       <div className='mb-6'><HomeProductButtons /></div>
     </>
