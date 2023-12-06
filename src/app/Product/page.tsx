@@ -1,18 +1,20 @@
+'use client'
+import { Suspense, useRef, FC } from 'react'
 import { NextPage } from 'next'
-//import Test from '@/components/Test'
+import * as THREE from 'three'
+import { Canvas, useFrame, useThree} from '@react-three/fiber'
+import { SpotLight, Preload, Text } from '@react-three/drei'
 import Menu from '@/components/Menu'
+import Scene from '@/features/Canvas/Scene'
+import Loader from '@/components/Loader'
 
 const TopPage: NextPage = () => {
   return (
     <>
-      {/*
-        *<Test test='hoge' />
-        */}
       <Menu />
-      <div className='snap-start pt-[101px] flex flex-col h-screen w-screen select-none text-white text-center'>
-        <p>START FROM HERE</p>
+      <div className='pt-[101px] text-white text-center'>
+        <p>Under Construction!</p>
       </div>
-      <div className='snap-start text-white text-center flex flex-col justify-center select-none h-screen w-screen italic'>Fin</div>
     </>
   )
 }

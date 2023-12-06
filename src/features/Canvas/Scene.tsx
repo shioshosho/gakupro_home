@@ -1,4 +1,4 @@
-import { FC, forwardRef, ForwardRefRenderFunction, useImperativeHandle, useRef } from 'react'
+import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { MeshProps } from '@react-three/fiber'
 import * as THREE from 'three'
@@ -13,8 +13,8 @@ type Props = MeshProps & {
   position :THREE.Vector3 | number[]
 }
 
-const Scene: FC<Props> = (props, ref) => {
-	const { modelPath, material, castShadow, receiveShadow, ...inputProps } = props
+const Scene = forwardRef(function Scene(props :Props,ref :any) {
+	const {modelPath, material, castShadow, receiveShadow, ...inputProps } = props
   const refG = useRef<THREE.Group>(null!)
   const refM = useRef<THREE.Mesh>(null!)
   useImperativeHandle(ref, () => ({
@@ -38,6 +38,7 @@ const Scene: FC<Props> = (props, ref) => {
       </group>
     </>
   )
-}
+})
 
 export default Scene
+//export const WrappedScene = forwardRef(Scene)
