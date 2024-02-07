@@ -66,9 +66,10 @@ const Contents: FC = () => {
         receiveShadow
         castShadow
         />
-        <Text position={[0,2.5,0]} scale={[viewport.width/20,viewport.width/20,viewport.width/20]} color='white'>
-          Write Something Here !
+        <Text font={'/ZenKakuGothicNew-Medium.ttf'} position={[0,2.5,0]} scale={[viewport.width/30,viewport.width/30,viewport.width/30]} color='white'>
+          メタバースとWebアプリで誰にでも分かり易く
         </Text>
+        })
         <mesh
         //position={[0, -2, 0]}
         position={[0,-viewport.width/10,0]}
@@ -100,8 +101,8 @@ const TopPage: NextPage = () => {
       </div>
       <div className='text-white text-center my-8 text-2xl max-[768px]:my-6 max-[768px]:text-sm '>
         メタプラスは令和5年度に採択された<br className='hidden max-[768px]:block '/>
-        九州工業大学・明専会学生プロジェクトです<br/>
-        本プロジェクトでは以下に示すようなプロダクトに<br className='hidden max-[768px]:block '/>
+        九州工業大学の学生団体です<br/>
+        本団体では以下に示すようなプロジェクトに<br className='hidden max-[768px]:block '/>
         取り組んでいます
       </div>
       <div className='mb-6'><HomeProductButtons /></div>
