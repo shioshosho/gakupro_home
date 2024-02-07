@@ -69,7 +69,6 @@ const Contents: FC = () => {
         <Text font={'/ZenKakuGothicNew-Medium.ttf'} position={[0,2.5,0]} scale={[viewport.width/30,viewport.width/30,viewport.width/30]} color='white'>
           メタバースとWebアプリで誰にでも分かり易く
         </Text>
-        })
         <mesh
         //position={[0, -2, 0]}
         position={[0,-viewport.width/10,0]}
