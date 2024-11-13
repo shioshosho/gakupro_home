@@ -36,7 +36,7 @@ const Menu: FC<Props> = () => {
                 : null
               }
             </div>
-            <MenuElements name='About' />
+            {/*<MenuElements name='About' />*/}
             <MenuElements name='Product' />
             <MenuElements name='Contact' />
           </div>

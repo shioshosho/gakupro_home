@@ -1,19 +1,15 @@
-'use client'
-import { Suspense, useRef, FC } from 'react'
 import { NextPage } from 'next'
-import * as THREE from 'three'
-import { Canvas, useFrame, useThree} from '@react-three/fiber'
-import { SpotLight, Preload, Text } from '@react-three/drei'
+//import Test from '@/components/Test'
 import Menu from '@/components/Menu'
-import Scene from '@/features/Canvas/Scene'
-import Loader from '@/components/Loader'
 
 const TopPage: NextPage = () => {
   return (
     <>
       <Menu />
-      <div className='pt-[101px] text-white text-center'>
-        <p>Under Construction!</p>
+      <div className="flex flex-col w-screen">
+        <div className='mt-[101px]'/>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdWF0LFDn5z31IVjP3FsmZuowqF0TdWarYFU90KokZjZgTdgw/viewform?embedded=true" className="w-full m-0 overflow-hidden" style={{ height:"930px", minWidth:"320px" }} >読み込んでいます…</iframe>
+        {/*GoogleFormの編集用リンク https://docs.google.com/forms/d/17r-ftT61JoQSc3whv5v1mKbAvQHMCeWvV6mNoNXDOh8/edit*/}
       </div>
     </>
   )

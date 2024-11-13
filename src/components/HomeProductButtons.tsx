@@ -27,12 +27,12 @@ const HomeProductButtons: FC<Props> = () => {
   return(
     <>
       <div className='flex flex-col space-y-6'>
-          <HomeProductButton href={"/Product"} name='道案内AR' />
-          <HomeProductButton href={"/Product"} name='研究室デジタルアーカイブ' />
-          <HomeProductButton href={"/Product"} name='VRChat' />
-          <HomeProductButton href={"/Product"} name='バーチャルGYMLABO' />
-          <HomeProductButton href={"/Product"} name='バーチャルキャンパス' />
-          <HomeProductButton href={"/Product"} name='ペッパーズゴースト' />
+          <HomeProductButton href={"/Product#giving_direction_with_ar"} name='道案内AR' />
+          <HomeProductButton href={"/Product#virtual_gymlabo"} name='バーチャルGYMLABO' />
+          <HomeProductButton href={"/Product#virtual_campus"} name='バーチャルキャンパス' />
+          <HomeProductButton href={"/Product#gymalabo_lab_introduction"} name='GYMLABO研究室紹介' />
+          <HomeProductButton href={"/Product#nft"} name='NFT' />
+          <HomeProductButton href={"/Product#safety_and_health_vr_teaching_materials"} name='安全衛生VR教材' />
       </div>
     </>
   )
